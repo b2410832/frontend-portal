@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment # 1-1. 建立 Deployment 物件
+metadata:
+  name: frontend-portal-deployment # 1-2. 指定 Deployment 名稱
+spec:
+  # replicas: 3 # 2. 建立 3 個 Pods 實體
+  selector: # 1-7. 選擇標籤為 app=frontend-portal 的 Pods
+      matchLabels:
+        app: frontend-portal 
+  template: # 1-3. 指定 Pods 內容
+    metadata:
+      labels: # 1-6. 在 Pods 貼標籤 app:frontend-portal
+        app: frontend-portal 
+    spec:
+      containers:
+      - name: frontend-portal # 1-4. 指定 Container 的名稱
+        image: b2410832/frontend-portal:1.0.0 # 1-5. 指定 Container 使用的 image
+        # image: b2410832/frontend-portal:2.0.0 # 3. 更新 Container 使用的 image

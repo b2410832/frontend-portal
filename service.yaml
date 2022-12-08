@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service # 1. 建立 Service 物件
+metadata:
+  name:  frontend-portal-service # 2. 指定 Service 名稱
+spec:
+  selector: # 4. 選擇標籤為 app=frontend-portal 的 Pods
+    app: frontend-portal
+  type: NodePort # 3. Service 種類: ClusterIP(default)/NodePort/LoadBalancer/ExternalName
+  ports:
+    - nodePort: 31111 # 7. 指定 Node 開放的 port (30000~32767)，沒有指定的話 Kubernetes 會隨機幫我們選一個port number
+      port: 3000 # 6. 指定 Service 開放的 port
+      targetPort: 80 # 5. 指定 Pod 開放的 port，沒有指定的話 Kubernetes 會設定成跟 port 一致
